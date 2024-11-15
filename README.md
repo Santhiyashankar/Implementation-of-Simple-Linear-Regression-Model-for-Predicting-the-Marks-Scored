@@ -8,90 +8,97 @@ To write a program to predict the marks scored by a student using the simple lin
 2. Anaconda – Python 3.7 Installation / Jupyter notebook
 
 ## Algorithm
-```
-1.Import the standard Libraries.
-2.Set variables for assigning dataset values.
-3.Import linear regression from sklearn.
-4.Assign the points for representing in the graph.
-5.Predict the regression for marks by using the representation of the graph.
-6.Compare the graphs and hence we obtained the linear regression for the given datas.
-```
-
+1. Import necessary libraries: pandas, numpy, matplotlib, and scikit-learn.
+2. Load the dataset student_scores.csv into a DataFrame and print it to verify contents.
+3. Display the first and last few rows of the DataFrame to inspect the data structure.
+4. Extract the independent variable (x) and dependent variable (y) as arrays from the DataFrame.
+5. Split the data into training and testing sets, with one-third used for testing and a fixed random_state for reproducibility.
+6. Create and train a linear regression model using the training data.
+7. Make predictions on the test data and print both the predicted and actual values for comparison.
+8. Plot the training data as a scatter plot and overlay the fitted regression line to visualize the model's fit.
+9. Plot the test data as a scatter plot with the regression line to show model performance on unseen data.
+10. Calculate and print error metrics: Mean Absolute Error (MAE), Mean Squared Error (MSE), and Root Mean Squared Error (RMSE) for evaluating model accuracy.
+11. Display the plots to visually assess the regression results.
 ## Program:
-
-```
+```Python
 /*
 Program to implement the simple linear regression model for predicting the marks scored.
-Developed by:Santhiya S
-RegisterNumber:212223220098 
+Developed by: SANTHIYA S
+RegisterNumber:  212223220098
 */
-
-
-import pandas as pd
+import pandas as pd 
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.metrics import mean_absolute_error,mean_squared_error
 df=pd.read_csv('student_scores.csv')
-print(df)
-df.head(0)
-df.tail(0)
-print(df.head())
-print(df.tail())
-x = df.iloc[:,:-1].values
-print(x)
-y = df.iloc[:,1].values
-print(y)
+df.head()
+df.tail()
+x=df.iloc[:,:-1].values
+x
+y=df.iloc[:,1].values
+y
 from sklearn.model_selection import train_test_split
 x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=1/3,random_state=0)
-from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import LinearRegression 
 regressor = LinearRegression()
 regressor.fit(x_train,y_train)
-y_pred = regressor.predict(x_test)
-print(y_pred)
-print(y_test)
-#Graph plot for training data
-plt.scatter(x_train,y_train,color='black')
-plt.plot(x_train,regressor.predict(x_train),color='blue')
-plt.title("Hours vs Scores(Training set)")
+y_pred=regressor.predict(x_test)
+y_pred
+y_test
+#graph plot for training data
+plt.scatter(x_train,y_train,color="orange")
+plt.plot(x_train,regressor.predict(x_train),color="red")
+plt.title("Hours vs Scores (Training set)")
 plt.xlabel("Hours")
-plt.ylabel("Scores")
+plt.ylabel("scores")
 plt.show()
-#Graph plot for test data
-plt.scatter(x_test,y_test,color='black')
-plt.plot(x_train,regressor.predict(x_train),color='red')
-plt.title("Hours vs Scores(Testing set)")
+#graph plot for test data
+plt.scatter(x_test,y_test,color="orange")
+plt.plot(x_test,regressor.predict(x_test),color="red")
+plt.title("Hours vs Scores (Test set)")
 plt.xlabel("Hours")
-plt.ylabel("Scores")
+plt.ylabel("scores")
 plt.show()
-mse=mean_absolute_error(y_test,y_pred)
+#caluculate Mean absolute erroe
+mse=mean_squared_error(y_test,y_pred)
 print('MSE = ',mse)
+
 mae=mean_absolute_error(y_test,y_pred)
 print('MAE = ',mae)
+
 rmse=np.sqrt(mse)
-print("RMSE= ",rmse)
+print("RMSE = ",rmse)
+
+
 ```
 
 ## Output:
+### head:
+![image](https://github.com/user-attachments/assets/8fcf0beb-772a-4949-a3d1-383da7ffe32e)
 
+### tail:
+![image](https://github.com/user-attachments/assets/fa70ae56-140e-41b6-9fdf-b66bd304c0a7)
 
-![image](https://github.com/user-attachments/assets/6182a7e7-af97-4035-b10a-c88d3dce3052)
+### Output 3:
+![image](https://github.com/user-attachments/assets/f03258f1-e678-4df9-b66a-733b14f65670)
 
-![image](https://github.com/user-attachments/assets/96845ce2-a3d3-47c6-921c-27f191e8aad1)
+### Output 4:
+![image](https://github.com/user-attachments/assets/12c31a7a-fa68-40b8-9918-543ae38f0885)
 
-![image](https://github.com/user-attachments/assets/d8cb806c-e9e3-4163-8141-2ad05571b7ba)
+### output 5:
+![image](https://github.com/user-attachments/assets/53f10323-baac-4a28-9d43-1d9019c4ad35)
 
-![image](https://github.com/user-attachments/assets/93dc9902-52a2-4604-90a6-2c195e4a65c5)
+### Output 6:
+![image](https://github.com/user-attachments/assets/d25aaa43-7340-43e5-a58c-9305b21c5285)
 
+### Output 7:
+![image](https://github.com/user-attachments/assets/fe3a45d8-49cc-4bfe-be29-2b1cc648f102)
 
-![Screenshot 2024-08-29 114303](https://github.com/user-attachments/assets/3fe4d593-4b2a-4cc7-80d9-696ce3da86b5)
+### Output 8:
+![image](https://github.com/user-attachments/assets/74512aae-b854-48dd-996c-b5e174bbf462)
 
-![image](https://github.com/user-attachments/assets/de4f8774-a598-44aa-a75a-1bc66257eb40)
-
-
-![image](https://github.com/user-attachments/assets/7f2934a4-718b-423d-8cc7-22942fcf6a94)
-
-![image](https://github.com/user-attachments/assets/0cbbce4d-4e4b-4a16-aa2b-ce9e987748ec)
-
+### Output 9:
+![image](https://github.com/user-attachments/assets/423659c4-9da4-4df4-8556-15c96a065914)
 
 
 ## Result:
